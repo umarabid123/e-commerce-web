@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts, updateProduct } from "../../store/slices/productSlice";
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify'; // Import toast
+import { deleteProduct, fetchProducts, updateProduct } from "../../store/slices/productSlice"; // Add deleteProduct action
 import AddProduct from '../product/Product';
 import ProductCard from '../../components/product_card/ProductCrad';
-// import ProductCard from '../../components/product_card/ProductCard'
 
 const Home = () => {
     const products = useSelector(store => store.productSlice.products);
@@ -18,15 +19,29 @@ const Home = () => {
 
     // Function to handle the product update
     const handleUpdate = (product) => {
-        setSelectedProduct(product); // Set the selected product for updating
+        setSelectedProduct(product); 
     };
 
     // Function to handle form submission for updates
     const handleUpdateSubmit = (updatedProductData) => {
         if (selectedProduct) {
             dispatch(updateProduct({ id: selectedProduct.id, product: updatedProductData }));
-            setSelectedProduct(null); // Reset the selected product after updating
+            setSelectedProduct(null); 
         }
+    };
+
+    // Function to handle product deletion with a toast notification
+    const handleDelete = (id) => {
+        dispatch(deleteProduct(id)); // Dispatch delete action
+        toast.success('Product deleted!', { // Show success toast
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+        });
     };
 
     return (
@@ -64,13 +79,24 @@ const Home = () => {
                 </div>
             </div>
 
+            {/* Add Product Button */}
+            <div className="flex justify-center mt-8">
+                <Link
+                    to="/products" 
+                    className="bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white font-semibold py-4 px-10 rounded-full shadow-xl transform transition-all duration-500 ease-in-out hover:scale-110"
+                >
+                    Add Product
+                </Link>
+            </div>
+
             {/* Product Cards */}
-            <div className="content-container relative flex justify-between gap-y-10 flex-wrap p-4">
+            <div className="content-container relative flex gap-x-20 gap-y-10 flex-wrap p-4 mt-8">
                 {products.map((item) => (
                     <ProductCard
                         product={item} 
                         key={item.id} 
-                        onUpdate={() => handleUpdate(item)} // Pass the item to handleUpdate
+                        onUpdate={() => handleUpdate(item)} 
+                        onDelete={() => handleDelete(item.id)} // Pass the delete function
                     />
                 ))}
             </div>
