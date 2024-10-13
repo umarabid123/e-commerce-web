@@ -10,28 +10,7 @@ const ProductCard = ({ product, onUpdate }) => {
   // Handle Delete with Toast notification after successful dispatch
   const handleDelete = (id) => {
     dispatch(deleteProductApiAction(id))
-      .then(() => {
-        toast.error(`Product "${product.title}" deleted`, {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-        });
-      })
-      .catch((err) => {
-        toast.error("Error deleting product", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-        });
-      });
+       
   };
 
   return (
