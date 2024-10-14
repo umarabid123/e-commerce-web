@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const ProductCard = ({ product, onUpdate }) => {
   const dispatch = useDispatch();
 
-  // Handle Delete with Toast notification after successful dispatch
+  // Handle Delete Toast notification after successful dispatch
   const handleDelete = (id) => {
     dispatch(deleteProductApiAction(id))
        
