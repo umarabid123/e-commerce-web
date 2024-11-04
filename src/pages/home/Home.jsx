@@ -79,7 +79,7 @@ const Home = () => {
                 </div>
             </div>
 
-            {/* Add Product Button */}
+            {/* Add Product Buton */}
             <div className="flex justify-center mt-8">
                 <Link
                     to="/products" 
