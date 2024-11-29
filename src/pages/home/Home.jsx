@@ -81,7 +81,7 @@ const Home = () => {
 
             {/* Add Product Buton */}
             <div className="flex justify-center mt-8">
-                <Link
+                <Link    
                     to="/products" 
                     className="bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white font-semibold py-4 px-10 rounded-full shadow-xl transform transition-all duration-500 ease-in-out hover:scale-110"
                 >
